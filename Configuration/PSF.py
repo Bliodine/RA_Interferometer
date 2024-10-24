@@ -5,13 +5,10 @@ from scipy import constants as const        # Import physical constants
 import matplotlib.pyplot as plt             # Plotting package for visualizations
 from astropy import units as u              # Astropy's units for handling physical units and constants
 import numpy as np                          # NumPy for array manipulation and numerical operations
-import tqdm                                 # TQDM for progress bars during calculations
+from tqdm import tqdm                                 # TQDM for progress bars during calculations
 
 # Set desired font style for matplotlib plots
-plt.rcParams.update({
-    "font.family": 'serif',                 # Use serif fonts
-    "font.serif": ['Palatino']              # Specifically, Palatino font family
-})
+plt.rcParams.update({"font.family": 'serif'})                 # Use serif fonts
 
 
 '''
@@ -30,7 +27,7 @@ Outputs:
 
 def pixel_brightness_faster(acm_single_pol, l, m, uv, frequency):
     # Status update
-    print(f"Calculating pixel brightness for pixel with l={l} and m={m}...")
+    # print(f"Calculating pixel brightness for pixel with l={l} and m={m}...")
 
     # Convert antenna correlation matrix to complex 64-bit values
     a = acm_single_pol.astype(np.complex64)
@@ -39,8 +36,7 @@ def pixel_brightness_faster(acm_single_pol, l, m, uv, frequency):
     f = frequency.to(u.Hz).value
 
     # Convert UV coordinates to meters and scale by frequency and the speed of light
-    uv_l = uv.to(u.m).value
-    uv_l *= f/const.c
+    uv_l = uv * f/const.c
 
     brightness = 0.0            # Initialize brightness accumulator
     num_vis = 0                 # Count of visibility measurements
@@ -49,13 +45,11 @@ def pixel_brightness_faster(acm_single_pol, l, m, uv, frequency):
     ll = l.to(u.rad).value.astype(np.float32)
     mm = m.to(u.rad).value.astype(np.float32)
 
-    # Loop over pairs of antennas
-    for a1 in range(acm_single_pol.shape[0]):
-        for a2 in range(acm_single_pol.shape[0]):
-            if a1 != a2:                # Skip auto-correlations (only cross-correlations)
-                # Calculate complex exponential and add its real part to brightness
-                brightness += (a[a1, a2] * np.exp(2j*np.pi*(uv_l[a1, a2, 0]*ll + uv_l[a1, a2, 1]*mm))).real
-                num_vis += 1            # Increment visibility count
+    # Loop over pairs of antennas (2D array now)
+    for idx, (u_val, v_val) in enumerate(uv_l):
+        brightness += (a[idx // acm_single_pol.shape[0], idx % acm_single_pol.shape[0]] *
+                       np.exp(2j * np.pi * (u_val * ll + v_val * mm))).real
+        num_vis += 1
 
     # Return average brightness per visibility
     return brightness/num_vis
@@ -148,10 +142,10 @@ def calc_npix():
     num_pix = 2.0 / pixel_separation
 
     # Status update
-    print(f"Number of pixels calculated: {round(num_pix, 0)}")
+    print(f"Number of pixels calculated: {np.round(num_pix, 0)}")
 
     # Return rounded number of pixels
-    return round(num_pix, 0)
+    return np.round(num_pix, 0)
 
 '''
 plot_psf
@@ -192,13 +186,13 @@ n_ant = 9
 num_pix = calc_npix()
 
 # Define the central observation frequency (1.42 GHz for hydrogen line observations)
-freq = 1.42*u.GHz
+# freq = 1.42*u.GHz
 
 # Generate the PSF image using the make_image function
-psf, psf_extent = make_image(np.ones_like((n_ant, n_ant)), num_pix, uv*u.m, freq)
+# psf, psf_extent = make_image(np.ones_like((n_ant, n_ant)), num_pix, uv*u.m, freq)
 
 # Plot the PSF using the plot_psf function
-plot_psf(psf, psf_extent)
+# plot_psf(psf, psf_extent)
 
 # Status update
 print("PSF calculation and plotting completed.")

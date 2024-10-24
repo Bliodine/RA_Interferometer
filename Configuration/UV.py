@@ -3,13 +3,10 @@
 # Importing all the needed modules and packages
 import numpy as np
 import matplotlib.pyplot as plt
-import tqdm
+from tqdm import tqdm
 
 # Set desired font style for matplotlib plots
-plt.rcParams.update({
-    "font.family": 'serif',                 # Use serif fonts
-    "font.serif": ['Palatino']              # Specifically, Palatino font family
-})
+plt.rcParams.update({"font.family": 'serif'})                # Use serif fonts
 
 
 # Define system-specific variables

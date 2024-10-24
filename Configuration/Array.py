@@ -4,14 +4,10 @@
 # Importing all the necessary modules and packages
 import numpy as np
 import matplotlib.pyplot as plt
-import tqdm
+from tqdm import tqdm
 
 # Set desired font style for matplotlib plots
-plt.rcParams.update({
-    "font.family": 'serif',                 # Use serif fonts
-    "font.serif": ['Palatino']              # Specifically, Palatino font family
-})
-
+plt.rcParams.update({"font.family": 'serif'})                 # Use serif fonts
 
 # Define system-specific variables
 paint_can_diameter = 0.183          # Paint can diameter in meters (represents the size of the antennas)
