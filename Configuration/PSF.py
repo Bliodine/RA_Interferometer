@@ -29,6 +29,9 @@ Outputs:
 '''
 
 def pixel_brightness_faster(acm_single_pol, l, m, uv, frequency):
+    # Status update
+    print(f"Calculating pixel brightness for pixel with l={l} and m={m}...")
+
     # Convert antenna correlation matrix to complex 64-bit values
     a = acm_single_pol.astype(np.complex64)
 
@@ -74,6 +77,9 @@ Outputs:
 
 
 def make_image(acm, num_pix, uv, frequency, l_range=(1.0, -1.0), m_range=(-1.0, 1.0)):
+    # Status update
+    print(f"Generating PSF image with {num_pix}x{num_pix} pixels...")
+
     # Initialize an empty image array with dimensions num_pix x num_pix
     img = np.zeros((num_pix, num_pix), dtype=np.float32)
 
@@ -95,6 +101,8 @@ def make_image(acm, num_pix, uv, frequency, l_range=(1.0, -1.0), m_range=(-1.0, 
     img_extent = (l_coor[0].to(u.rad).value + half, m_coor[0].to(u.rad).value - half,
                   l_coor[-1].to(u.rad).value - half, m_coor[-1].to(u.rad).value + half)
 
+    # Status update
+    print("PSF image generation complete.")
     return img, img_extent
 
 
@@ -109,6 +117,9 @@ Outputs:
 '''
 
 def subband_frequency(subband_number, clock_frequency=200*u.MHz):
+    # Status update
+    print(f"Calculating frequency for subband {subband_number}...")
+
     # Calculate subband frequency based on the given clock frequency
     sb_freq = (subband_number/512) * clock_frequency/2
 
@@ -125,6 +136,8 @@ Outputs:
 '''
 
 def calc_npix():
+    # Status update
+    print("Calculating the number of pixels required for PSF image...")
 
     over_sampling = 2.5         # Oversampling factor
 
@@ -133,6 +146,9 @@ def calc_npix():
 
     # Calculate the number of pixels for the PSF
     num_pix = 2.0 / pixel_separation
+
+    # Status update
+    print(f"Number of pixels calculated: {round(num_pix, 0)}")
 
     # Return rounded number of pixels
     return round(num_pix, 0)
@@ -148,6 +164,9 @@ Outputs:
 '''
 
 def plot_psf(psf, psf_extent):
+    # Status update
+    print("Plotting PSF image...")
+
     # Set the figure size and resolution for the PSF plot
     scale = 0.5
 
@@ -159,6 +178,8 @@ def plot_psf(psf, psf_extent):
 
     # Save the plot as 'psf.png'
     plt.savefig(f'psf.png', bbox_inches='tight')
+    # Status update
+    print("PSF image saved as 'psf.png'.")
 
 # Main script execution
 
@@ -178,3 +199,6 @@ psf, psf_extent = make_image(np.ones_like((n_ant, n_ant)), num_pix, uv*u.m, freq
 
 # Plot the PSF using the plot_psf function
 plot_psf(psf, psf_extent)
+
+# Status update
+print("PSF calculation and plotting completed.")
