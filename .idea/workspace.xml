@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="centered the grid, included preset function">
+    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="Added randomization button&#10;put antenna controls into control frame to the right&#10;put the export and plot button in the control frame">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration/antenna_positions.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729791375040</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added randomization button&#10;put antenna controls into control frame to the right&#10;put the export and plot button in the control frame">
+      <created>1729842713496</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729842713496</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,6 +141,7 @@
     <MESSAGE value="Added uv plane scripts&#10;Added antenna plane script&#10;included documentation&#10;added status updates as print outs" />
     <MESSAGE value="added interactive optimizer file" />
     <MESSAGE value="centered the grid, included preset function" />
-    <option name="LAST_COMMIT_MESSAGE" value="centered the grid, included preset function" />
+    <MESSAGE value="Added randomization button&#10;put antenna controls into control frame to the right&#10;put the export and plot button in the control frame" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added randomization button&#10;put antenna controls into control frame to the right&#10;put the export and plot button in the control frame" />
   </component>
 </project>
