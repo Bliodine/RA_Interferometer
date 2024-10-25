@@ -11,17 +11,22 @@ Antenna Configuration Optimizer
 A graphical interface for designing and testing antenna configurations for a 9-antenna interferometer. The tool allows for interactive adjustments to antenna positions, visualization of UV coverage, and PSF calculation.
 Features:
 
-  Antenna Positioning Grid:
-        Visual grid (2.5m x 2.5m) with axes centered at (0, 0).
-        Drag-and-drop or precise coordinate entry for antenna positions.
-    Control Panel Options:
-        Antenna Selection: Dropdown to select an antenna and update its coordinates.
-        Preset Loading: Load configurations (circle, hexagon, etc.) from a dropdown.
-        Randomize Configuration: Automatically set random positions for all antennas.
-        Export Positions: Save the current configuration as antenna_positions_#.csv, where # auto-increments to avoid overwriting.
-    Visualization:
-        UV Coverage Plot: Generates a UV plane plot for the selected configuration.
-        PSF Plot: Displays the Point Spread Function based on current positions.
+Antenna Positioning Grid:
+
+  Visual grid (2.5m x 2.5m) with axes centered at (0, 0).
+  Drag-and-drop or precise coordinate entry for antenna positions.
+  
+Control Panel Options:
+
+  Antenna Selection: Dropdown to select an antenna and update its coordinates.
+  Preset Loading: Load configurations (circle, hexagon, etc.) from a dropdown.
+  Randomize Configuration: Automatically set random positions for all antennas.
+  Export Positions: Save the current configuration as antenna_positions_#.csv, where # auto-increments to avoid overwriting.
+
+Visualization:
+
+  UV Coverage Plot: Generates a UV plane plot for the selected configuration.
+  PSF Plot: Displays the Point Spread Function based on current positions.
 
 Usage Instructions:
 
