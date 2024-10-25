@@ -89,12 +89,12 @@ antenna_menu.pack(pady=5)
 # X and Y coordinate inputs with spinbox for up/down adjustments
 x_label = tk.Label(control_frame, text='X Position (m):')
 x_label.pack()
-x_spinbox = Spinbox(control_frame, from_=0, to=grid_size, increment=0.1)
+x_spinbox = Spinbox(control_frame, from_=-grid_size/2, to=grid_size/2, increment=0.1)
 x_spinbox.pack()
 
 y_label = tk.Label(control_frame, text="Y Position (m):")
 y_label.pack()
-y_spinbox = Spinbox(control_frame, from_=0, to=grid_size, increment=0.1)
+y_spinbox = Spinbox(control_frame, from_=-grid_size/2, to=grid_size/2, increment=0.1)
 y_spinbox.pack()
 
 # Function to update the spinboxes based on the selected antenna's position
@@ -190,7 +190,7 @@ def randomize_configuration():
     global antenna_positions
 
     # Generate random positions within grid boundaries
-    antenna_positions = np.random.uniform(-grid_size/2, grid_size/2, size=(num_antennas, 2))
+    antenna_positions = np.round(np.random.uniform(-grid_size/2, grid_size/2, size=(num_antennas, 2)), 2)
 
     # Update the canvas positions
     for i in range(num_antennas):
@@ -249,10 +249,14 @@ def export_and_plot():
     ax_psf.imshow(psf, origin='lower', extent=psf_extent)
     plt.show()
     '''
-    ax[1].imshow(psf, extent=psf_extent, origin='lower', cmap='viridis')
+    psf_img = ax[1].imshow(psf, extent=psf_extent, origin='lower', cmap='viridis')
+    #ax[1].imshow(psf, extent=psf_extent, origin='lower', cmap='viridis')
     ax[1].set_title('Point Spread Function (PSF)')
     ax[1].set_xlabel('l (rad)')
     ax[1].set_ylabel('m (rad)')
+
+    # Add colorbar to the PSF plot (ax[1]) to visualize intensity scale
+    plt.colorbar(psf_img, ax=ax[1], orientation='vertical', label='Intensity')
 
     canvas_plot.draw()
 
