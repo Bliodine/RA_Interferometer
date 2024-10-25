@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="added interactive optimizer file">
+    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="centered the grid, included preset function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Configuration/antenna_positions.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729784007261</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="centered the grid, included preset function">
+      <created>1729791375040</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1729791375040</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,6 +135,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added uv plane scripts&#10;Added antenna plane script&#10;included documentation&#10;added status updates as print outs" />
     <MESSAGE value="added interactive optimizer file" />
-    <option name="LAST_COMMIT_MESSAGE" value="added interactive optimizer file" />
+    <MESSAGE value="centered the grid, included preset function" />
+    <option name="LAST_COMMIT_MESSAGE" value="centered the grid, included preset function" />
   </component>
 </project>
