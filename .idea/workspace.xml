@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="Added baseline distribution histogram&#10;Changed grid size to 2m x 2m (palette design)&#10;Updated calculation method for the sidelobe plot&#10;Made sure that antennas are at least 18.5cm apart when randomizing the configuration">
+    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="Changed the grid size back to 2.5m (whoopsie)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729864787680</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Changed the grid size back to 2.5m (whoopsie)">
+      <created>1729865874066</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1729865874066</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,6 +174,7 @@
     <MESSAGE value="some work files" />
     <MESSAGE value="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision" />
     <MESSAGE value="Added baseline distribution histogram&#10;Changed grid size to 2m x 2m (palette design)&#10;Updated calculation method for the sidelobe plot&#10;Made sure that antennas are at least 18.5cm apart when randomizing the configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added baseline distribution histogram&#10;Changed grid size to 2m x 2m (palette design)&#10;Updated calculation method for the sidelobe plot&#10;Made sure that antennas are at least 18.5cm apart when randomizing the configuration" />
+    <MESSAGE value="Changed the grid size back to 2.5m (whoopsie)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed the grid size back to 2.5m (whoopsie)" />
   </component>
 </project>
