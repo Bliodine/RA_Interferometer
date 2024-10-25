@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision">
+    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="Added baseline distribution histogram&#10;Changed grid size to 2m x 2m (palette design)&#10;Updated calculation method for the sidelobe plot&#10;Made sure that antennas are at least 18.5cm apart when randomizing the configuration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729857204331</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added baseline distribution histogram&#10;Changed grid size to 2m x 2m (palette design)&#10;Updated calculation method for the sidelobe plot&#10;Made sure that antennas are at least 18.5cm apart when randomizing the configuration">
+      <created>1729864787680</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1729864787680</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -159,6 +165,7 @@
     <MESSAGE value="Added randomization button&#10;put antenna controls into control frame to the right&#10;put the export and plot button in the control frame" />
     <MESSAGE value="some work files" />
     <MESSAGE value="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision" />
+    <MESSAGE value="Added baseline distribution histogram&#10;Changed grid size to 2m x 2m (palette design)&#10;Updated calculation method for the sidelobe plot&#10;Made sure that antennas are at least 18.5cm apart when randomizing the configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added baseline distribution histogram&#10;Changed grid size to 2m x 2m (palette design)&#10;Updated calculation method for the sidelobe plot&#10;Made sure that antennas are at least 18.5cm apart when randomizing the configuration" />
   </component>
 </project>

@@ -18,7 +18,7 @@ import csv
 # Constants
 num_antennas = 9
 antenna_labels = [f'A{i+1}' for i in range(num_antennas)]
-grid_size = 2                              # Define size of the ground in meters (10x10m)
+grid_size = 2.5                              # Define size of the ground in meters (10x10m)
 export_count = 0                                   # Counter for exported CSV files
 
 # Create a list to store the positions of antennas in the grid, now centered around (0, 0)
