@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="">
+    <list default="true" id="f31099b7-8263-4623-8696-5eb8989451fd" name="Changes" comment="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/antenna_optimizer.py" afterDir="false" />
     </list>
@@ -130,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729849327016</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision">
+      <created>1729857204331</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1729857204331</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +158,7 @@
     <MESSAGE value="centered the grid, included preset function" />
     <MESSAGE value="Added randomization button&#10;put antenna controls into control frame to the right&#10;put the export and plot button in the control frame" />
     <MESSAGE value="some work files" />
-    <option name="LAST_COMMIT_MESSAGE" value="some work files" />
+    <MESSAGE value="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a colorbar to the psf plot&#10;Made the antenna position spinboxes to be adjustable within the current grid bounds&#10;Made sure the randomized positions are on centimeter precision" />
   </component>
 </project>

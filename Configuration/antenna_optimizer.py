@@ -18,7 +18,7 @@ import csv
 # Constants
 num_antennas = 9
 antenna_labels = [f'A{i+1}' for i in range(num_antennas)]
-grid_size = 2.5                              # Define size of the ground in meters (10x10m)
+grid_size = 2                              # Define size of the ground in meters (10x10m)
 export_count = 0                                   # Counter for exported CSV files
 
 # Create a list to store the positions of antennas in the grid, now centered around (0, 0)
@@ -89,12 +89,12 @@ antenna_menu.pack(pady=5)
 # X and Y coordinate inputs with spinbox for up/down adjustments
 x_label = tk.Label(control_frame, text='X Position (m):')
 x_label.pack()
-x_spinbox = Spinbox(control_frame, from_=-grid_size/2, to=grid_size/2, increment=0.1)
+x_spinbox = Spinbox(control_frame, from_=-grid_size/2, to=grid_size/2, increment=0.05)
 x_spinbox.pack()
 
 y_label = tk.Label(control_frame, text="Y Position (m):")
 y_label.pack()
-y_spinbox = Spinbox(control_frame, from_=-grid_size/2, to=grid_size/2, increment=0.1)
+y_spinbox = Spinbox(control_frame, from_=-grid_size/2, to=grid_size/2, increment=0.05)
 y_spinbox.pack()
 
 # Function to update the spinboxes based on the selected antenna's position
@@ -188,9 +188,24 @@ load_preset_button.pack(pady=10)
 # Function to generate and apply a random configuration
 def randomize_configuration():
     global antenna_positions
+    min_distance = 0.185                # Minimum allowable distance between antennas
 
-    # Generate random positions within grid boundaries
-    antenna_positions = np.round(np.random.uniform(-grid_size/2, grid_size/2, size=(num_antennas, 2)), 2)
+    # Repeatedly generate random positions until they meet the distance constraint
+    valid_positions = False
+    while not valid_positions:
+        # Generate random positions within grid boundaries
+        antenna_positions = np.round(np.random.uniform(-grid_size/2, grid_size/2, size=(num_antennas, 2)), 2)
+
+        # Check all pairwise distances to ensure they exceed the minimum distance
+        valid_positions = True
+        for i in range(num_antennas):
+            for j in range(i+1, num_antennas):
+                distance = np.linalg.norm(antenna_positions[i] - antenna_positions[j])
+                if distance < min_distance:
+                    valid_positions = False
+                    break
+            if not valid_positions:
+                break
 
     # Update the canvas positions
     for i in range(num_antennas):
@@ -206,6 +221,33 @@ def randomize_configuration():
 randomize_button = Button(control_frame, text='Randomize Array', command=randomize_configuration)
 randomize_button.pack(pady=10)
 
+# Function to calculate baseline lengths and plot them as a histogram
+def plot_baseline_distribution(antenna_positions):
+    baselines = []
+    num_antennas = len(antenna_positions)
+    for i in range(num_antennas):
+        for j in range(i + 1, num_antennas):
+            distance = np.linalg.norm(antenna_positions[i] - antenna_positions[j])
+            baselines.append(distance)
+
+    return baselines
+
+# Function to calculate average PSF lobes over horizontal, vertical, and diagonal lines
+def psf_lobes(psf, num_pix):
+    # Define l/m coordinate arrays
+    l_coords = np.linspace(-2, 2, num_pix)  # Coordinate array along l-axis
+    m_coords = np.linspace(-2, 2, num_pix)  # Coordinate array along m-axis
+
+    # Extract middle cross-sections (horizontal, vertical, and both diagonals)
+    y_middle = psf[:, num_pix // 2]                      # Horizontal cross-section (m=0)
+    x_middle = psf[num_pix // 2, :]                      # Vertical cross-section (l=0)
+    diag_main = np.diagonal(psf)                         # Diagonal from top-left to bottom-right
+    diag_secondary = np.diagonal(np.fliplr(psf))         # Diagonal from top-right to bottom-left
+
+    # Calculate the average cross-section intensity
+    mean_cross_section = (y_middle + x_middle + diag_main + diag_secondary) / 4
+
+    return l_coords, mean_cross_section
 
 # Function to create a nice image of the psf
 def hdfig(subplots_def=None, scale=0.5, figsize=(8, 4.5)):
@@ -230,14 +272,27 @@ def export_and_plot():
     # Clear existing axes before re-plotting
     ax[0].cla()
     ax[1].cla()
+    ax[2].cla()
+    ax[3].cla()
 
-    # Plot the UV coverage in the first subplot
-    ax[0].scatter(u, v, color='blue')
-    ax[0].set_title('UV coverage')
-    ax[0].set_xlabel('u (m)')
-    ax[0].set_ylabel('v (m)')
+    baselines = plot_baseline_distribution(antenna_positions)
+
+    # Plot the histogram of baseline lengths on the provided axis
+    ax[0].hist(baselines, bins=10, color='skyblue', edgecolor='black')
+    ax[0].set_title(f'Baseline Distribution (Total {len(baselines)})')
+    ax[0].set_xlabel('Baseline Length (m)')
+    ax[0].set_ylabel('Frequency')
+    ax[0].set_xlim(0, 3)
     ax[0].grid(True)
     ax[0].set_aspect('equal')
+
+    # Plot the UV coverage in the first subplot
+    ax[1].scatter(u, v, color='blue')
+    ax[1].set_title('UV coverage')
+    ax[1].set_xlabel('u (m)')
+    ax[1].set_ylabel('v (m)')
+    ax[1].grid(True)
+    ax[1].set_aspect('equal')
 
     # Calculate and plot the PSF in the second subplot
     freq = 1.42 * unit.GHz
@@ -249,14 +304,23 @@ def export_and_plot():
     ax_psf.imshow(psf, origin='lower', extent=psf_extent)
     plt.show()
     '''
-    psf_img = ax[1].imshow(psf, extent=psf_extent, origin='lower', cmap='viridis')
+    psf_img = ax[2].imshow(psf, extent=psf_extent, origin='lower', cmap='viridis')
     #ax[1].imshow(psf, extent=psf_extent, origin='lower', cmap='viridis')
-    ax[1].set_title('Point Spread Function (PSF)')
-    ax[1].set_xlabel('l (rad)')
-    ax[1].set_ylabel('m (rad)')
+    ax[2].set_title('Point Spread Function (PSF)')
+    ax[2].set_xlabel('l (rad)')
+    ax[2].set_ylabel('m (rad)')
+    ax[2].set_aspect('equal')
 
-    # Add colorbar to the PSF plot (ax[1]) to visualize intensity scale
-    plt.colorbar(psf_img, ax=ax[1], orientation='vertical', label='Intensity')
+    # Plot lobe structure of the PSF
+    x_cs, y_cs = psf_lobes(psf, num_pix)
+    ax[3].plot(x_cs, y_cs, c='k')
+    ax[3].set_title('Central lobe')
+    ax[3].set_xlabel('l (rad)')
+    ax[3].set_ylabel('Intensity')
+    ax[3].set_xlim(x_cs[0], x_cs[-1])
+
+    ax[3].axhline(y=0.25, c='r', linestyle='dashed')
+    ax[3].set_aspect('equal')
 
     canvas_plot.draw()
 
@@ -268,7 +332,7 @@ plot_button.pack()
 scale = 0.5
 
 # Create a canvas for matplotlib figure embedding and plotting window using matplotlib (embedded in Tkinter)
-fig, ax = plt.subplots(1, 2, figsize=(8, 4.5), dpi=scale * 1920 /8)       # 1row, 2 columns: UV plane and PSF side-by-side
+fig, ax = plt.subplots(1, 4, figsize=(16, 4.5), dpi=scale * 1920 /8)       # 1row, 2 columns: UV plane and PSF side-by-side
 canvas_plot = FigureCanvasTkAgg(fig, master=root)
 canvas_plot.get_tk_widget().pack()
 
